@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronDown, Menu, ShieldCheck, Terminal, X } from "lucide-react";
 import { useState } from "react";
+import { FreeModule } from "@/components/FreeModule";
 
 export const Route = createFileRoute("/")({
   head: () => ({

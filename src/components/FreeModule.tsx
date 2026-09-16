@@ -102,7 +102,7 @@ export function FreeModule({ open, onClose }: { open: boolean; onClose: () => vo
     window.setTimeout(() => {
       if (command.finding) setFindings((current) => [...current, command.id as CommandId]);
       setTyping(false);
-et    }, 500);
+    }, 500);
   };
 
   const available = useMemo(() => commands.filter((command) => !history.some((entry) => entry.id === command.id)), [history]);
