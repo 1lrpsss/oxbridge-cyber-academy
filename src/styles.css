@@ -19,6 +19,8 @@
  */
 
 @theme inline {
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -46,6 +48,9 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -62,26 +67,29 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --radius: 0.5rem;
+  --background: oklch(0.125 0.018 274);
+  --foreground: oklch(0.92 0.015 250);
+  --card: oklch(0.18 0.029 265);
+  --card-foreground: oklch(0.92 0.015 250);
+  --popover: oklch(0.18 0.029 265);
+  --popover-foreground: oklch(0.92 0.015 250);
+  --primary: oklch(0.81 0.145 207);
+  --primary-foreground: oklch(0.13 0.02 270);
+  --secondary: oklch(0.19 0.029 265);
+  --secondary-foreground: oklch(0.92 0.015 250);
+  --muted: oklch(0.22 0.025 265);
+  --muted-foreground: oklch(0.67 0.03 252);
+  --accent: oklch(0.67 0.19 298);
+  --accent-foreground: oklch(0.96 0.01 250);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.81 0.145 207 / 15%);
+  --input: oklch(0.81 0.145 207 / 20%);
+  --ring: oklch(0.81 0.145 207);
+  --success: oklch(0.76 0.17 158);
+  --warning: oklch(0.78 0.16 76);
+  --danger: oklch(0.66 0.2 25);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +148,81 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+    overflow-x: hidden;
   }
+
+  html { scroll-behavior: smooth; }
+
+  button, a, summary { outline-color: var(--color-ring); outline-offset: 4px; }
+}
+
+@keyframes ox-float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(24px,-34px); } }
+@keyframes ox-grid { to { background-position: 60px 60px; } }
+@keyframes ox-scan { 0% { transform: translateY(-140px); } 100% { transform: translateY(100vh); } }
+@keyframes ox-blink { 0%,45% { opacity: 1; } 50%,100% { opacity: 0; } }
+@keyframes ox-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ox-type { from { width: 0; } to { width: min(31ch, 100%); } }
+@keyframes ox-line { from { width: 0; } to { width: 100%; } }
+@keyframes ox-marquee { to { transform: translateX(-50%); } }
+@keyframes ox-terminal { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes ox-progress { from { width: 0; } to { width: 78%; } }
+@keyframes ox-pulse { 50% { opacity: .35; transform: scale(.8); } }
+@keyframes ox-glitch { 0%,92%,100% { transform: translate(0); text-shadow: none; } 94% { transform: translate(-2px,1px); text-shadow: 3px 0 var(--accent); } 96% { transform: translate(2px,-1px); text-shadow: -3px 0 var(--danger); } }
+
+@utility ox-glass {
+  background: color-mix(in oklab, var(--card) 62%, transparent);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(18px) saturate(130%);
+}
+
+@utility ox-grid {
+  background-image: linear-gradient(color-mix(in oklab, var(--primary) 7%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 7%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: ox-grid 10s linear infinite;
+}
+
+@utility ox-mini-grid {
+  background-image: linear-gradient(color-mix(in oklab, var(--primary) 5%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 5%, transparent) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+@utility ox-noise { opacity: .035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
+@utility ox-scan { height: 120px; background: linear-gradient(to bottom, transparent, color-mix(in oklab, var(--primary) 5%, transparent), transparent); animation: ox-scan 7s linear infinite; }
+@utility ox-aura { position: fixed; z-index: 0; border-radius: 9999px; filter: blur(110px); opacity: .16; pointer-events: none; animation: ox-float 14s ease-in-out infinite; }
+@utility ox-aura-one { width: 430px; height: 430px; top: -160px; left: -120px; background: var(--primary); }
+@utility ox-aura-two { width: 370px; height: 370px; top: 250px; right: -150px; background: var(--accent); animation-duration: 18s; animation-direction: reverse; }
+@utility ox-rise { animation: ox-rise .9s cubic-bezier(.2,.8,.2,1) both; }
+@utility ox-delay-1 { animation-delay: .1s; }
+@utility ox-delay-2 { animation-delay: .25s; }
+@utility ox-delay-3 { animation-delay: .4s; }
+@utility ox-delay-4 { animation-delay: .55s; }
+@utility ox-type { width: 0; overflow: hidden; white-space: nowrap; border-right: 2px solid var(--primary); animation: ox-type 2.2s steps(31) 1s forwards, ox-blink .9s step-end infinite; }
+@utility ox-caret { &::after { content: "_"; color: var(--primary); animation: ox-blink 1s step-end infinite; } }
+@utility ox-glitch { display: inline-block; animation: ox-glitch 6s infinite; }
+@utility ox-pulse { animation: ox-pulse 2s ease-in-out infinite; }
+@utility ox-line { height: 1px; background: linear-gradient(90deg, var(--primary), transparent); animation: ox-line 1.2s .4s both; }
+@utility ox-marquee { animation: ox-marquee 26s linear infinite; }
+@utility ox-progress { animation: ox-progress 1.8s 1s cubic-bezier(.2,.8,.2,1) both; }
+@utility ox-terminal-glow { background: color-mix(in oklab, var(--primary) 12%, transparent); filter: blur(50px); }
+@utility ox-primary-button { color: var(--primary-foreground); background: var(--primary); box-shadow: 0 0 0 transparent; transition: transform .2s ease, box-shadow .2s ease; &:hover { transform: translateY(-2px); box-shadow: 0 0 32px color-mix(in oklab, var(--primary) 32%, transparent); } }
+@utility ox-kicker { font-family: var(--font-mono); font-size: .68rem; color: var(--primary); text-transform: uppercase; }
+@utility ox-nav-link { position: relative; transition: color .2s ease; &:hover { color: var(--primary); } &::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -7px; height: 1px; background: var(--primary); transition: right .2s ease; } &:hover::after { right: 0; } }
+@utility ox-track { transition: transform .25s ease, border-color .25s ease, background .25s ease; &:hover { transform: translateY(-6px); border-color: color-mix(in oklab, var(--primary) 45%, transparent); background: color-mix(in oklab, var(--card) 80%, transparent); } }
+@utility ox-node { background: color-mix(in oklab, var(--card) 82%, transparent); box-shadow: 0 0 20px color-mix(in oklab, var(--primary) 5%, transparent); animation: ox-pulse 4s ease-in-out infinite; }
+@utility ox-terminal-line { opacity: 0; animation: ox-terminal .35s ease forwards; }
+@utility ox-terminal-1 { animation-delay: .8s; }
+@utility ox-terminal-2 { animation-delay: 1.2s; }
+@utility ox-terminal-3 { animation-delay: 1.6s; }
+@utility ox-terminal-4 { animation-delay: 2s; }
+@utility ox-terminal-5 { animation-delay: 2.4s; }
+@utility ox-terminal-6 { animation-delay: 2.8s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ox-grid, .ox-scan, .ox-aura, .ox-rise, .ox-type, .ox-caret, .ox-glitch, .ox-pulse, .ox-line, .ox-marquee, .ox-progress, .ox-node, .ox-terminal-line { animation: none !important; }
+  .ox-type { width: auto; }
+  .ox-terminal-line { opacity: 1; }
+  .ox-progress { width: 78%; }
 }
