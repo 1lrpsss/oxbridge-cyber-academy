@@ -143,13 +143,14 @@ export function FreeModule({ open, onClose }: { open: boolean; onClose: () => vo
 
             {lesson < 3 ? (
               <div className="ox-rise mt-7" key={lesson}>
-                <h3 className="text-2xl font-semibold sm:text-3xl">{lessons[lesson].title}</h3>
-                <p className="mt-4 max-w-xl leading-7 text-muted-foreground">{lessons[lesson].body}</p>
+                <h3 className="text-2xl font-semibold sm:text-3xl">{lessons[lesson]!.title}</h3>
+                <p className="mt-4 max-w-xl leading-7 text-muted-foreground">{lessons[lesson]!.body}</p>
                 <ul className="mt-6 grid gap-2.5">
-                  {lessons[lesson].points.map((point) => (
+                  {lessons[lesson]!.points.map((point) => (
                     <li key={point} className="flex items-center gap-3 font-mono text-xs text-foreground"><Check className="size-3.5 shrink-0 text-success" />{point}</li>
                   ))}
                 </ul>
+              </div>
 
                 {lesson === 1 && (
                   <div className="mt-7 rounded-lg border border-border bg-background/80 p-4">
