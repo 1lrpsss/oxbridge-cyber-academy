@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronDown, Menu, ShieldCheck, Terminal, X } from "lucide-react";
 import { useState } from "react";
+import { FreeModule } from "@/components/FreeModule";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,6 +31,7 @@ const curriculum = [
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [moduleOpen, setModuleOpen] = useState(false);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
@@ -79,7 +81,7 @@ function Index() {
             A hands-on academy for responsible security professionals. Train in legal cyber ranges, solve realistic attacks, and learn from working practitioners.
           </p>
           <div className="ox-rise ox-delay-3 mt-9 flex flex-wrap items-center gap-5">
-            <a className="ox-primary-button group inline-flex items-center gap-2 rounded-md px-6 py-3 font-semibold" href="#enroll">start free module <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></a>
+            <button className="ox-primary-button group inline-flex items-center gap-2 rounded-md px-6 py-3 font-semibold" onClick={() => setModuleOpen(true)}>start free module <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></button>
             <a className="inline-flex items-center gap-2 font-mono text-sm text-foreground transition hover:text-primary" href="#curriculum">view syllabus <span aria-hidden="true">↗</span></a>
           </div>
           <div className="ox-rise ox-delay-4 mt-10 flex flex-wrap gap-x-6 gap-y-3 font-mono text-[10px] uppercase text-muted-foreground">
@@ -184,6 +186,8 @@ function Index() {
       <footer className="relative z-10 border-t border-border bg-background/80">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8"><div className="font-mono text-sm text-muted-foreground"><span className="text-primary">&gt;_</span> oxbridge — hack the planet, ethically.</div><div className="font-mono text-[10px] text-muted-foreground">© 2026 OXBRIDGE ACADEMY · ALL SYSTEMS NOMINAL</div></div>
       </footer>
+
+      <FreeModule open={moduleOpen} onClose={() => setModuleOpen(false)} />
     </main>
   );
 }
