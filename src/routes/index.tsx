@@ -186,6 +186,8 @@ function Index() {
       <footer className="relative z-10 border-t border-border bg-background/80">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8"><div className="font-mono text-sm text-muted-foreground"><span className="text-primary">&gt;_</span> oxbridge — hack the planet, ethically.</div><div className="font-mono text-[10px] text-muted-foreground">© 2026 OXBRIDGE ACADEMY · ALL SYSTEMS NOMINAL</div></div>
       </footer>
+
+      <FreeModule open={moduleOpen} onClose={() => setModuleOpen(false)} />
     </main>
   );
 }
